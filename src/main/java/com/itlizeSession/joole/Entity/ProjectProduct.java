@@ -14,23 +14,25 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="ProjectProduct")
+@Table(name="projectproduct")
 public class ProjectProduct {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="pp_id")
 	private int pp_id;
 
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name = "resource_id")
+	//@JoinColumn(name = "resource_id")
 	private Product prod;
 
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name = "project_id")
+	//@JoinColumn(name = "project_id")
 	private Project proj;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="time_created")
 	private Timestamp time_created;
 
 	public int getPp_id() {

@@ -2,25 +2,25 @@
   "groups": [
     {
       "name": "limit",
-      "type": "com.itlizeSession.product.Config.LimitConfig",
-      "sourceType": "com.itlizeSession.product.Config.LimitConfig"
+      "type": "com.itlizeSession.joole.Config.LimitConfig",
+      "sourceType": "com.itlizeSession.joole.Config.LimitConfig"
     }
   ],
   "properties": [
     {
       "name": "limit.description",
       "type": "java.lang.String",
-      "sourceType": "com.itlizeSession.product.Config.LimitConfig"
+      "sourceType": "com.itlizeSession.joole.Config.LimitConfig"
     },
     {
       "name": "limit.max-price",
       "type": "java.math.BigDecimal",
-      "sourceType": "com.itlizeSession.product.Config.LimitConfig"
+      "sourceType": "com.itlizeSession.joole.Config.LimitConfig"
     },
     {
       "name": "limit.min-price",
       "type": "java.math.BigDecimal",
-      "sourceType": "com.itlizeSession.product.Config.LimitConfig"
+      "sourceType": "com.itlizeSession.joole.Config.LimitConfig"
     }
   ],
   "hints": []

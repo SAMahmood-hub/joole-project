@@ -39,8 +39,8 @@ public class ProductController {
 		Product product = new Product();
 		product.setBrand(brand);
 		product.setCertification(certifications);
-		product.setTechnical_detail_id(firmSpecs);
-		product.setMechanical_detail_id(globalSpecs);
+		product.setTechnicalDetailId(firmSpecs);
+		product.setMechanicalDetailId(globalSpecs);
 		return service.save(product);
 	}
 

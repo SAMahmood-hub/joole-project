@@ -22,10 +22,11 @@ import javax.persistence.Table;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Project")
+@Table(name="project")
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@Column(name="project_id")
 	private int id;
 
 	@Column(name="owner")
@@ -42,7 +43,8 @@ public class Project {
 	private Timestamp timeUpdated;
 
 	@OneToMany(mappedBy = "proj", fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="project_id")
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinColumn(name="project_id")
 	Set<ProjectProduct> productProject;
 
 

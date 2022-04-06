@@ -16,7 +16,7 @@ import static javax.persistence.CascadeType.ALL;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
 	@Id
@@ -28,14 +28,10 @@ public class User {
 //    private Date time_updated;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Timestamp time_created;
+	private Timestamp timeCreated;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Timestamp time_updated;
-
-	@OneToMany(targetEntity = Product.class, cascade = ALL)
-	@JoinColumn(name = "up_fk", referencedColumnName = "id")
-	private List<Product> products;
+	private Timestamp timeUpdated;
 
 }

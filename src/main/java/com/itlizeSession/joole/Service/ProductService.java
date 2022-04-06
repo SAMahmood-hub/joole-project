@@ -13,6 +13,4 @@ public interface ProductService {
     void createTwo();
 
     Product save(Product myProduct);
-
-    List<Product> findByBrand(String b);
 }

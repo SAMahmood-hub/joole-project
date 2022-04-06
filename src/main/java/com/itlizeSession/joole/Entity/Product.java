@@ -11,56 +11,54 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
 
-
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="Product")
+@Table(name="product")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="resource_id")
-	private int resource_id;
+	private int resourceId;
 
 	@Column(name="product_type_id")
-	private int product_type_id;
+	private int productTypeId;
 
 	@Column(name="technical_detail_id")
-	private int technical_detail_id;
+	private int technicalDetailId;
 
 	@Column(name="mechanical_detail_id")
-	private int mechanical_detail_id;
+	private int mechanicalDetailId;
 
-	@Column(name="certification")
+	@Column(name="certifications")
 	private String certification;
 
 	@Column(name="brand")
 	private String brand;
 
-	@OneToMany(mappedBy="prod", fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL)
-	@JoinColumn(name="project_id")
+	@OneToMany(mappedBy="prod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinColumn(name="project_id")
 	private Set<ProjectProduct> projectProduct;
 
 	@Column(name="time_created")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Timestamp time_created;
+	private Timestamp timeCreated;
 
 	@Column(name="time_updated")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private Timestamp time_updated;
+	private Timestamp timeUpdated;
 
-	public int getResource_id() {
-		return resource_id;
+	public int getResourceId() {
+		return resourceId;
 	}
 
-	public void setResource_id(int id) {
-		this.resource_id = id;
+	public void setResourceId(int id) {
+		this.resourceId = id;
 	}
 
 	public String getBrand() {
@@ -71,20 +69,20 @@ public class Product {
 		this.brand = brand;
 	}
 
-	public int getTechnical_detail_id() {
-		return technical_detail_id;
+	public int getTechnicalDetailId() {
+		return technicalDetailId;
 	}
 
-	public void setTechnical_detail_id(int firmSpecs) {
-		this.technical_detail_id = firmSpecs;
+	public void setTechnicalDetailId(int firmSpecs) {
+		this.technicalDetailId = firmSpecs;
 	}
 
-	public int getMechanical_detail_id() {
-		return mechanical_detail_id;
+	public int getMechanicalDetailId() {
+		return mechanicalDetailId;
 	}
 
-	public void setMechanical_detail_id(int globalSpecs) {
-		this.mechanical_detail_id = globalSpecs;
+	public void setMechanicalDetailId(int globalSpecs) {
+		this.mechanicalDetailId = globalSpecs;
 	}
 
 	public String getCertification() {
@@ -95,12 +93,12 @@ public class Product {
 		this.certification = certifications;
 	}
 
-	public int getProduct_type_id() {
-		return product_type_id;
+	public int getProductTypeId() {
+		return productTypeId;
 	}
 
-	public void setProduct_type_id(int product_type_id) {
-		this.product_type_id = product_type_id;
+	public void setProductTypeId(int product_type_id) {
+		this.productTypeId = product_type_id;
 	}
 
 	public Set<ProjectProduct> getProjectProduct() {
@@ -111,20 +109,20 @@ public class Product {
 		this.projectProduct = projectProduct;
 	}
 
-	public Timestamp getTime_created() {
-		return time_created;
+	public Timestamp getTimeCreated() {
+		return timeCreated;
 	}
 
-	public void setTime_created(Timestamp time_created) {
-		this.time_created = time_created;
+	public void setTimeCreated(Timestamp time_created) {
+		this.timeCreated = time_created;
 	}
 
-	public Timestamp getTime_updated() {
-		return time_updated;
+	public Timestamp getTimeUpdated() {
+		return timeUpdated;
 	}
 
-	public void setTime_updated(Timestamp time_updated) {
-		this.time_updated = time_updated;
+	public void setTimeUpdated(Timestamp time_updated) {
+		this.timeUpdated = time_updated;
 	}
 
 }
