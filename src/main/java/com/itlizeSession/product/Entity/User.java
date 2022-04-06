@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -16,27 +16,26 @@ import static javax.persistence.CascadeType.ALL;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER_TBL")
-
+@Table(name = "User")
 public class User {
 
-    @Id
-    private String user_name;
-    private String role;
-    //encoded password
-    private String password;
-//    private Date time_created;
+	@Id
+	private String user_name;
+	private String role;
+	//encoded password
+	private String password;
+	//    private Date time_created;
 //    private Date time_updated;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time_created;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp time_created;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time_updated;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp time_updated;
 
-    @OneToMany(targetEntity = Product.class, cascade = ALL)
-    @JoinColumn(name = "up_fk", referencedColumnName = "id")
+	@OneToMany(targetEntity = Product.class, cascade = ALL)
+	@JoinColumn(name = "up_fk", referencedColumnName = "id")
+	private List<Product> products;
 
-    private List<Product> products;
 }

@@ -37,18 +37,18 @@ public class ProductServiceImp implements ProductService {
 		prod1.setBrand("Honeybell");
 		prod1.setPrice(new BigDecimal("150"));
 		prod1.setType("fan");
-		prod1.setGlobalSpecs(50);
-		prod1.setFirmSpecs(20);
-		prod1.setCertifications("energy safe");
+		prod1.setMechanical_detail_id(50);
+		prod1.setTechnical_detail_id(20);
+		prod1.setCertification("energy safe");
 		repository.save(prod1);
 
 		Product prod2 = new Product();
 		prod2.setBrand("Toshiba");
 		prod2.setPrice(new BigDecimal("2000"));
 		prod2.setType("computer");
-		prod2.setGlobalSpecs(120);
-		prod2.setFirmSpecs(50);
-		prod2.setCertifications("uranium free");
+		prod2.setMechanical_detail_id(120);
+		prod2.setTechnical_detail_id(50);
+		prod2.setCertification("uranium free");
 		repository.save(prod2);
 	}
 

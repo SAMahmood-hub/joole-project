@@ -38,11 +38,9 @@ public class ProductController {
 							 @RequestParam("certifications") String certifications) {
 		Product product = new Product();
 		product.setBrand(brand);
-		product.setPrice(price);
-		product.setType(type);
-		product.setCertifications(certifications);
-		product.setFirmSpecs(firmSpecs);
-		product.setGlobalSpecs(globalSpecs);
+		product.setCertification(certifications);
+		product.setTechnical_detail_id(firmSpecs);
+		product.setMechanical_detail_id(globalSpecs);
 		return service.save(product);
 	}
 
@@ -57,7 +55,6 @@ public class ProductController {
 	public Product update(@RequestParam("id") Integer id,
 							 @RequestParam("type") String type) {
 		Product product= service.findOneById(id);
-		product.setType(type);
 			return service.save(product);
 		}
 
