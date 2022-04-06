@@ -2,9 +2,7 @@ package com.itlizeSession.product.Repository;
 
 import com.itlizeSession.product.Entity.User;
 import junit.framework.TestCase;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,11 @@ public class UserRepositoryTest extends TestCase {
         user1.setUser_name("Tiance");
         user1.setPassword("123");
         user1.setRole("Actor");
-//        user1.setTime_created();
-//        user1.setTime_updated();
+
+        Date date1 = new Date(System.currentTimeMillis());
+        Date date2 = new Date(System.currentTimeMillis());
+        user1.setTime_created(date1);
+        user1.setTime_updated(date2);
 
         User res = userRepository.save(user1);
         Assert.assertNotEquals(null, res);
