@@ -21,7 +21,7 @@ public class UserRepositoryTest extends TestCase {
     @Test
     public void saveTest() {
         User user1 = new User();
-        user1.setUser_name("Tiance");
+        user1.setUserName("Tiance");
         user1.setPassword("123");
         user1.setRole("Actor");
 
@@ -35,8 +35,8 @@ public class UserRepositoryTest extends TestCase {
 
     }
     @Test
-    public void findByUser_name() {
-        User res = userRepository.findByUser_name("Tiance");
+    public void findByUserName() {
+        User res = userRepository.findByUserName("Tiance");
 
         System.out.println(res);
         Assert.assertNotEquals(null, res);

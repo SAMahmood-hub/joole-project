@@ -34,21 +34,21 @@ public class UserServiceImp implements UserService {
 
         User user1 = new User();
         user1.setRole("actor");
-        user1.setUser_name("Paul");
+        user1.setUserName("Paul");
         user1.setPassword("12345");
         userRepository.save(user1);
 
         User user2 = new User();
         user1.setRole("actor2");
-        user1.setUser_name("Paul2");
+        user1.setUserName("Paul2");
         user1.setPassword("123452");
         userRepository.save(user2);
 
     }
 
     @Override
-    public User findByUser_name(String user_name) {
-        return userRepository.findByUser_name(user_name);
+    public User findByUserName(String user_name) {
+        return userRepository.findByUserName(user_name);
     }
 
     @Override

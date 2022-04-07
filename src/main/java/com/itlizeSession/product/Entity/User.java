@@ -4,24 +4,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 
-import static javax.persistence.CascadeType.ALL;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER_TBL")
+@ToString
+
 
 public class User {
 
     @Id
-    private String user_name;
+    private String userName;
     private String role;
     //encoded password
     private String password;
@@ -35,8 +35,11 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time_updated;
 
-    @OneToMany(targetEntity = Product.class, cascade = ALL)
-    @JoinColumn(name = "up_fk", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "user",
+            cascade = {CascadeType.REMOVE})
 
-    private List<Product> products;
+
+    private List<Project> project;
+    //private List<Product> product;
 }

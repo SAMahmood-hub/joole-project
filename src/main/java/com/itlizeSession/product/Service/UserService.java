@@ -19,7 +19,7 @@ public interface UserService {
 
     List<User> findAll();
     void createTwo();
-    User findByUser_name(String user_name);
+    User findByUserName(String userName);
     User save(User myUser);
 
 
