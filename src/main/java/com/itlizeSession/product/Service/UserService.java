@@ -15,12 +15,10 @@ public interface UserService {
 //    public User getUserByName(String user_name) {
 //        return  userRepository.findByUser_name(user_name);
 //    }
-    List<User> findByRole(String role);
+    User Create();
 
-    List<User> findAll();
-    void createTwo();
-    User findByUserName(String userName);
-    User save(User myUser);
+    User Update(User user);
+
 
 
 
