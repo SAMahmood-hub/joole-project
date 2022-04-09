@@ -15,27 +15,26 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="product")
+//@Table(name="product")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="resource_id")
+	//@Column(name="resource_id")
 	private int resourceId;
 
-	@Column(name="product_type_id")
-	private int productTypeId;
+	@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "product_type_id")
+	private ProductType type;
 
-	@Column(name="technical_detail_id")
-	private int technicalDetailId;
+	//@Column(name="technical_detail_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	private TechnicalDetail technicalDetail;
 
-	@Column(name="mechanical_detail_id")
-	private int mechanicalDetailId;
-
-	@Column(name="certifications")
+	//@Column(name="certifications")
 	private String certification;
 
-	@Column(name="brand")
+	//@Column(name="brand")
 	private String brand;
 
 	@OneToMany(mappedBy="prod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -43,15 +42,23 @@ public class Product {
 	//@JoinColumn(name="project_id")
 	private Set<ProjectProduct> projectProduct;
 
-	@Column(name="time_created")
+	//@Column(name="time_created")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeCreated;
 
-	@Column(name="time_updated")
+	//@Column(name="time_updated")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeUpdated;
+
+	public Product(Integer id, String brand, String certification, String techDetail, String prodType) {
+		this.resourceId = id;
+		this.brand = brand;
+		this.certification = certification;
+		this.technicalDetail = new TechnicalDetail(techDetail);
+		this.type = new ProductType(prodType);
+	}
 
 	public int getResourceId() {
 		return resourceId;
@@ -59,6 +66,14 @@ public class Product {
 
 	public void setResourceId(int id) {
 		this.resourceId = id;
+	}
+
+	public ProductType getType() {
+		return type;
+	}
+
+	public void setType(ProductType type) {
+		this.type = type;
 	}
 
 	public String getBrand() {
@@ -69,22 +84,6 @@ public class Product {
 		this.brand = brand;
 	}
 
-	public int getTechnicalDetailId() {
-		return technicalDetailId;
-	}
-
-	public void setTechnicalDetailId(int firmSpecs) {
-		this.technicalDetailId = firmSpecs;
-	}
-
-	public int getMechanicalDetailId() {
-		return mechanicalDetailId;
-	}
-
-	public void setMechanicalDetailId(int globalSpecs) {
-		this.mechanicalDetailId = globalSpecs;
-	}
-
 	public String getCertification() {
 		return certification;
 	}
@@ -93,13 +92,6 @@ public class Product {
 		this.certification = certifications;
 	}
 
-	public int getProductTypeId() {
-		return productTypeId;
-	}
-
-	public void setProductTypeId(int product_type_id) {
-		this.productTypeId = product_type_id;
-	}
 
 	public Set<ProjectProduct> getProjectProduct() {
 		return projectProduct;
@@ -123,6 +115,10 @@ public class Product {
 
 	public void setTimeUpdated(Timestamp time_updated) {
 		this.timeUpdated = time_updated;
+	}
+
+	public String toString() {
+		return "ID: " + resourceId + "\nBrand: " + brand + "\nCertification: " + certification +"\nTime Created: " + timeCreated +"\nTime Updated: " + timeUpdated + "";
 	}
 
 }

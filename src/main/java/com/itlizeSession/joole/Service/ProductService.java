@@ -10,7 +10,12 @@ public interface ProductService {
 
     List<Product> findAll();
 
-    void createTwo();
+    public Product create(String brand, String certification, String techDetail, String prodType);
 
-    Product save(Product myProduct);
+    Product update(Integer id, Product updateProduct);
+
+    void delete(Integer Id);
+
+    Product read(Integer Id);
+
 }

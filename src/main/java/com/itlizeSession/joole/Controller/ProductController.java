@@ -39,9 +39,7 @@ public class ProductController {
 		Product product = new Product();
 		product.setBrand(brand);
 		product.setCertification(certifications);
-		product.setTechnicalDetailId(firmSpecs);
-		product.setMechanicalDetailId(globalSpecs);
-		return service.save(product);
+		return service.update(1, product);
 	}
 
 
@@ -55,12 +53,11 @@ public class ProductController {
 	public Product update(@RequestParam("id") Integer id,
 							 @RequestParam("type") String type) {
 		Product product= service.findOneById(id);
-			return service.save(product);
+		return service.update(1, product);
 		}
 
 
-	@PostMapping("/products/two")
-	public void createTwo() {
-		service.createTwo();
+	@PostMapping("/products/one")
+	public void create() {
 	}
 }
