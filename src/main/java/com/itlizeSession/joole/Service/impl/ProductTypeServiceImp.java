@@ -14,17 +14,25 @@ public class ProductTypeServiceImp implements ProductTypeService {
 	ProductTypeRepository productTypeRepository;
 
 	@Override
-	public ProductType create() {
-		ProductType productType = new ProductType("abc", "bcd","cda","fgd",1999);
+	public ProductType create(String useType, String app, String mountingLocation, String accessories, int year) {
+		ProductType productType = new ProductType(useType, app,mountingLocation,accessories,year);
 		productTypeRepository.save(productType);
 
 		return productType;
 	}
 
-
+	@Override
+	public ProductType saveProductType(ProductType productType) {
+		return productTypeRepository.save(productType);
+	}
 
 	@Override
-	public ProductType update(ProductType productType) {
+	public List<ProductType> getProductTypeList() {
+		return productTypeRepository.findAll();
+	}
+
+	@Override
+	public ProductType updateProductType(ProductType productType) {
 
 		productType.setUseType("abc");
 		productType.setApplication("bbb");
@@ -40,6 +48,11 @@ public class ProductTypeServiceImp implements ProductTypeService {
 		for(ProductType pt : list1) {
 			productTypeRepository.delete(pt);
 		}
+	}
+
+	@Override
+	public void deleteProductTypeById(Integer id) {
+		productTypeRepository.deleteById(id);
 
 	}
 }
