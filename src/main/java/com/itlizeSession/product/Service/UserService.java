@@ -15,9 +15,13 @@ public interface UserService {
 //    public User getUserByName(String user_name) {
 //        return  userRepository.findByUser_name(user_name);
 //    }
-    User Create();
+    User saveUser(User user);
 
-    User Update(User user);
+    List<User> getUserList();
+
+    User updateUserByName(User user);
+
+    void deleteUserByName(String userName);
 
 
 

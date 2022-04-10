@@ -14,32 +14,23 @@ public class ProductTypeServiceImp implements ProductTypeService {
     ProductTypeRepository productTypeRepository;
 
     @Override
-    public ProductType create() {
-        ProductType productType = new ProductType("abc", "bcd","cda","fgd",1999);
-        productTypeRepository.save(productType);
-
-        return productType;
-    }
-
-
-
-    @Override
-    public ProductType update(ProductType productType) {
-
-        productType.setUseType("abc");
-        productType.setApplication("bbb");
-        productType.setMountingLocation("aaa");
-        productType.setAccessories("qqq");
-        productType.setYear(2022);
-        return productType;
+    public ProductType saveProductType(ProductType productType) {
+        return productTypeRepository.save(productType);
     }
 
     @Override
-    public void deleteByApplication(String application) {
-        List<ProductType> list1 = productTypeRepository.findByApplication(application);
-        for(ProductType pt : list1) {
-            productTypeRepository.delete(pt);
-        }
+    public List<ProductType> getProductTypeList() {
+        return productTypeRepository.findAll();
+    }
+
+    @Override
+    public ProductType updateProductType(ProductType productType) {
+        return productTypeRepository.save(productType);
+    }
+
+    @Override
+    public void deleteProductTypeById(Integer id) {
+        productTypeRepository.deleteById(id);
 
     }
 }

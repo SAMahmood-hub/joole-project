@@ -24,6 +24,7 @@ import java.util.*;
 public class User {
 
     @Id
+
     private String userName;
     private String role;
     //encoded password
