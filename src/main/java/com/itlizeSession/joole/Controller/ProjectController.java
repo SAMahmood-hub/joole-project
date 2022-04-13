@@ -8,31 +8,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/project")
 public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 
-	@PostMapping("/project")
+	@PostMapping(path="/save")
 	public Project saveProject(@RequestBody Project project){
 		return projectService.saveProject(project);
 	}
 
-	@GetMapping("/project")
+	@GetMapping(path="/list")
 	public List<Project> fetchProjectList(){
 		return projectService.fetchProjectList();
 	}
 
-	@GetMapping("/project/{id}")
+	@GetMapping(path="/fetch/{id}")
 	public Project fetchProjectById(@PathVariable("id") Integer id){
 		return projectService.fetchProjectById(id);
 	}
 
-	@DeleteMapping("/project/{id}")
+	@DeleteMapping(path="/delete/{id}")
 	public String deleteProject(@PathVariable("id") Integer id){
 		projectService.deleteProjectById(id);
 		return "Project deleted successfully";
 	}
-	@PutMapping("/project")
+	@PutMapping(path="/save")
 	public Project updateProject(@RequestBody Project project){
 		return projectService.saveProject(project);
 	}

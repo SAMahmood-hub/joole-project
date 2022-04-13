@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/userController")
+@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -23,7 +23,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PostMapping("/get")
+	@PostMapping(path="/get")
 	public ResponseEntity<?> getUser () {
 		try{
 			userService.getUserList();

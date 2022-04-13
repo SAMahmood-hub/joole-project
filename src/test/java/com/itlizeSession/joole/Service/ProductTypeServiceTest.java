@@ -18,7 +18,7 @@ public class ProductTypeServiceTest {
     @Autowired
     ProductTypeServiceImp productTypeServiceImp;
 
-    @Test
+    /*@Test
     public void create() {
         ProductType res = productTypeServiceImp.create();
     }
@@ -35,5 +35,5 @@ public class ProductTypeServiceTest {
         productTypeServiceImp.deleteByApplication("aaa");
         productTypeServiceImp.deleteByApplication("abc");
         Assert.assertEquals(productTypeServiceImp, "aaa");
-    }
+    }*/
 }
