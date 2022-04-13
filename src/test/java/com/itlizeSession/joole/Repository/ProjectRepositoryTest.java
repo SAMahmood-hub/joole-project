@@ -1,4 +1,4 @@
-package com.itlizeSession.joole;
+package com.itlizeSession.joole.Repository;
 
 import com.itlizeSession.joole.Entity.Project;
 import com.itlizeSession.joole.Repository.ProjectRepository;
@@ -26,7 +26,7 @@ public class ProjectRepositoryTest extends TestCase {
         // Create an object of your entity
         Timestamp time1 = new Timestamp(System.currentTimeMillis());
         Timestamp time2 = new Timestamp(System.currentTimeMillis());
-        Project pro = new Project("Fisher",time1,time2);
+        Project pro = new Project(new User("Sniper"),time1,time2);
 
 
         // Try to save it to your repository

@@ -1,12 +1,15 @@
 package com.itlizeSession.joole.Service.impl;
 
 import com.itlizeSession.joole.Entity.Product;
+import com.itlizeSession.joole.Entity.ProductType;
+import com.itlizeSession.joole.Entity.TechnicalDetail;
 import com.itlizeSession.joole.Repository.ProductRepository;
 import com.itlizeSession.joole.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -17,8 +20,8 @@ public class ProductServiceImp implements ProductService {
 	private ProductRepository repository;
 
 	@Override
-	public Product findOneById(Integer Id) {
-		return repository.findById(Id).orElse(null);
+	public Product findOneById(Integer id) {
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -26,30 +29,30 @@ public class ProductServiceImp implements ProductService {
 		return repository.findAll();
 	}
 
-	/**
-	 * Transaction
-	 *  inventory > order
-	 */
 	@Transactional
-	public void createTwo() {
+	public Product create(String brand, String certification, String techDetail, String prodType) {
 		Product prod1 = new Product();
-		prod1.setBrand("Honeybell");
-		prod1.setMechanicalDetailId(50);
-		prod1.setTechnicalDetailId(20);
-		prod1.setCertification("energy safe");
-		repository.save(prod1);
-
-		Product prod2 = new Product();
-		prod2.setBrand("Toshiba");
-		prod2.setMechanicalDetailId(120);
-		prod2.setTechnicalDetailId(50);
-		prod2.setCertification("uranium free");
-		repository.save(prod2);
+		prod1.setTimeCreated(new Timestamp(System.currentTimeMillis()));
+		prod1.setTimeUpdated(new Timestamp(System.currentTimeMillis()));
+		prod1.setBrand(brand);
+		prod1.setCertification(certification);
+		prod1.setTechnicalDetail(new TechnicalDetail(techDetail));
+		prod1.setType(new ProductType(prodType));
+		return repository.save(prod1);
 	}
 
-	@Override
-	public Product save(Product myProduct) {
-		return repository.save(myProduct);
+	@Transactional
+	public Product update(Integer id, Product updateProduct) {
+		return repository.save(updateProduct);
+    }
+	@Transactional
+	public void delete(Integer id) {
+		repository.delete(findOneById(id));
 
+	}
+	@Transactional
+	public Product read(Integer id) {
+		System.out.println(findOneById(id));
+		return findOneById(id);
 	}
 }

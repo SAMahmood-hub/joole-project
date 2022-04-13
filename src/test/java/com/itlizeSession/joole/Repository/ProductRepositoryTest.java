@@ -1,4 +1,4 @@
-package com.itlizeSession.joole;
+package com.itlizeSession.joole.Repository;
 
 import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Entity.Project;

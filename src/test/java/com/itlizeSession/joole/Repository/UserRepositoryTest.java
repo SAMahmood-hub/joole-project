@@ -1,4 +1,4 @@
-package com.itlizeSession.joole;
+package com.itlizeSession.joole.Repository;
 
 import com.itlizeSession.joole.Repository.UserRepository;
 import com.itlizeSession.joole.Entity.User;
@@ -23,8 +23,7 @@ public class UserRepositoryTest extends TestCase {
 
     @Test
     public void saveTest() {
-        User user1 = new User();
-        user1.setUser_name("Tiance");
+        User user1 = new User("Tiance");
         user1.setPassword("123");
         user1.setRole("Actor");
 //        user1.setTime_created();

@@ -8,36 +8,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.sql.Timestamp;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="project")
+//@Table(name="project")
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
-	@Column(name="project_id")
+	//@Column(name="project_id")
 	private int id;
 
-	@Column(name="owner")
-	private String owner;
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.MERGE)
+	private User owner;
 
-	@Column(name="time_created")
+	//@Column(name="time_created")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeCreated;
 
-	@Column(name="time_updated")
+	//@Column(name="time_updated")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeUpdated;
@@ -48,7 +39,7 @@ public class Project {
 	Set<ProjectProduct> productProject;
 
 
-	public Project( String owner,Timestamp timeCreated, Timestamp timeUpdated) {
+	public Project( User owner,Timestamp timeCreated, Timestamp timeUpdated) {
 		this.owner = owner;
 		this.timeCreated = timeCreated;
 		this.timeUpdated = timeUpdated;
@@ -62,10 +53,10 @@ public class Project {
 		this.id = id;
 	}
 
-	public String getOwner() {
+	public User getOwner() {
 		return owner;
 	}
-	public void setOwner(String owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 	public Set<ProjectProduct> getProjectProduct() {

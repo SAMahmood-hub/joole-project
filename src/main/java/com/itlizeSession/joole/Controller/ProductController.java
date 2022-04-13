@@ -1,66 +1,58 @@
 package com.itlizeSession.joole.Controller;
 
-import com.itlizeSession.joole.Config.LimitConfig;
 import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/product")
 public class ProductController {
-
-
 
 	@Autowired
 	private ProductService service;
 
-	@Autowired
-	private LimitConfig limitConfig;
-
-
-	@GetMapping("/products")
-	public List<Product> list() {
-		return service.findAll();
+	@GetMapping(path="/list")
+	public ResponseEntity<?> list() {
+		service.create("hello", "hi", "its", "me");
+		System.out.println(service.findOneById(1));
+		List<Product> prod;
+		try {
+			prod = service.findAll();
+		} catch(Exception e) {
+			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(prod, HttpStatus.CREATED);
 	}
 
-
-	@PostMapping("/products")
+	@GetMapping(path="/create")
 	public Product create(@RequestParam("brand") String brand,
-							 @RequestParam("price") BigDecimal price,
 	                         @RequestParam("type") String type,
-						     @RequestParam("firm_specs") int firmSpecs,
-						     @RequestParam("global_specs") int globalSpecs,
+						     @RequestParam("technical_details") String specs,
 							 @RequestParam("certifications") String certifications) {
-		Product product = new Product();
-		product.setBrand(brand);
-		product.setCertification(certifications);
-		product.setTechnicalDetailId(firmSpecs);
-		product.setMechanicalDetailId(globalSpecs);
-		return service.save(product);
+		return service.create(brand, certifications, specs, type);
 	}
 
 
-	@GetMapping("/products/")
+	@GetMapping(path="/get")
 	public Product findById(@RequestParam("id") Integer id) {
 		return service.findOneById(id);
 	}
 
 
-	@PutMapping("/products/")
-	public Product update(@RequestParam("id") Integer id,
-							 @RequestParam("type") String type) {
-		Product product= service.findOneById(id);
-			return service.save(product);
-		}
+	@PutMapping(path="/save")
+	public Product saveProject(@RequestBody Product product){
+		return service.update(1, product);
+	}
 
 
-	@PostMapping("/products/two")
-	public void createTwo() {
-		service.createTwo();
+	@PostMapping(path="/delete")
+	public void delete(@RequestParam("id") Integer id) {
+		service.delete(id);
 	}
 }

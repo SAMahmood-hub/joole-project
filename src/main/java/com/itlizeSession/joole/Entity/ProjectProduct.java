@@ -14,25 +14,25 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="projectproduct")
+//@Table(name="projectproduct")
 public class ProjectProduct {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="pp_id")
+	//@Column(name="pp_id")
 	private int ppID;
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
 	//@JoinColumn(name = "resource_id")
 	private Product prod;
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
 	//@JoinColumn(name = "project_id")
 	private Project proj;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(name="time_created")
+	//@Column(name="time_created")
 	private Timestamp timeCreated;
 
 	public int getPpID() {
@@ -65,6 +65,22 @@ public class ProjectProduct {
 
 	public void setTimeCreated(Timestamp timeCreated) {
 		this.timeCreated = timeCreated;
+	}
+
+	public String toString() {
+		return "ID: " + ppID;
+	}
+
+	public ProjectProduct(ProjectProduct other) {
+		this.ppID = other.ppID;
+		this.prod = other.prod;
+		this.proj = other.proj;
+		this.timeCreated = new Timestamp(System.currentTimeMillis());
+	}
+
+	public ProjectProduct(Project proj, Product prod) {
+		this.proj = proj;
+		this.prod = prod;
 	}
 
 }
