@@ -1,5 +1,6 @@
 package com.itlizeSession.joole.Service.impl;
 
+import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Entity.ProductType;
 import com.itlizeSession.joole.Repository.ProductTypeRepository;
 import com.itlizeSession.joole.Service.ProductTypeService;
@@ -14,8 +15,8 @@ public class ProductTypeServiceImp implements ProductTypeService {
 	ProductTypeRepository productTypeRepository;
 
 	@Override
-	public ProductType create(String useType, String app, String mountingLocation, String accessories, int year) {
-		ProductType productType = new ProductType(useType, app,mountingLocation,accessories,year);
+	public ProductType create(Product prod, String useType, String app, String mountingLocation, String accessories, int year) {
+		ProductType productType = new ProductType(prod, useType, app,mountingLocation,accessories,year);
 		productTypeRepository.save(productType);
 
 		return productType;

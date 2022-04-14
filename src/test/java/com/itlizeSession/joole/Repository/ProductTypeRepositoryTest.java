@@ -1,5 +1,6 @@
 package com.itlizeSession.joole.Repository;
 
+import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Entity.ProductType;
 import com.itlizeSession.joole.Repository.ProductTypeRepository;
 import org.junit.Assert;
@@ -22,7 +23,8 @@ public class ProductTypeRepositoryTest {
 
     @Test
     public void saveTest(){
-        ProductType productType = new ProductType("abc","bcd","efg","qqq",1993);
+        Product prod = new Product();
+        ProductType productType = new ProductType(prod, "abc","bcd","efg","qqq",1993);
         ProductType result = productTypeRepository.save(productType);
         Assert.assertNotEquals(null, result);
     }

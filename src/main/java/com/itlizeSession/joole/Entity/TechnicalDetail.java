@@ -2,6 +2,7 @@ package com.itlizeSession.joole.Entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -14,6 +15,7 @@ public class TechnicalDetail {
 	private int id;
 
 	@OneToOne(mappedBy="technicalDetail")
+	@JsonIgnore
 	private Product product;
 
 	//@Column(name="details")
@@ -24,7 +26,11 @@ public class TechnicalDetail {
 	}
 
 	public TechnicalDetail(String details) {
-		super();
+		this.details = details;
+	}
+
+	public TechnicalDetail(Product prod, String details) {
+		this.product = prod;
 		this.details = details;
 	}
 

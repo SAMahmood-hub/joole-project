@@ -18,4 +18,6 @@ public interface ProductService {
 
     Product read(Integer Id);
 
+    void deleteAll();
+
 }

@@ -1,4 +1,5 @@
 package com.itlizeSession.joole.Service;
+import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Entity.TechnicalDetail;
 import com.itlizeSession.joole.Entity.User;
 import com.itlizeSession.joole.Repository.TechnicalDetailRepository;
@@ -28,7 +29,8 @@ public class TechnicalDetailServiceTest {
     @Test
     //@Ignore
     public void saveTechnicalDetail(){
-        TechnicalDetail tech = new TechnicalDetail("sample details:1111");
+        Product prod = new Product();
+        TechnicalDetail tech = new TechnicalDetail(prod, "sample details:1111");
 
         when(repository.save(tech)).thenReturn(tech);
 
@@ -39,7 +41,8 @@ public class TechnicalDetailServiceTest {
 
     @Test
     public void fetchTechnicalDetailById(){
-        TechnicalDetail tech = new TechnicalDetail("sample details:1111");
+        Product prod = new Product();
+        TechnicalDetail tech = new TechnicalDetail(prod, "sample details:1111");
 
         when(repository.findById(1)).thenReturn(Optional.of(tech));
         assertThat(service.fetchTechnicalDetailById(1)).isEqualTo(tech);
@@ -47,11 +50,12 @@ public class TechnicalDetailServiceTest {
 
     @Test
     public void fetchProjectList(){
-        TechnicalDetail tech1 = new TechnicalDetail("sample details:1111");
+        Product prod = new Product();
+        TechnicalDetail tech1 = new TechnicalDetail(prod, "sample details:1111");
         tech1.setDetails("Wells123");
 
-
-        TechnicalDetail tech2 = new TechnicalDetail("sample details:1111");
+        Product prod2 = new Product();
+        TechnicalDetail tech2 = new TechnicalDetail(prod2, "sample details:1111");
         tech2.setDetails("Wells12223");
 
         List<TechnicalDetail> ticketList = new ArrayList<>();
@@ -68,7 +72,8 @@ public class TechnicalDetailServiceTest {
     public void deleteTechnicalDetailById(){
 
 
-        TechnicalDetail tech1 = new TechnicalDetail("sample details:1111");
+        Product prod = new Product();
+        TechnicalDetail tech1 = new TechnicalDetail(prod, "sample details:1111");
         tech1.setDetails("Wells123");
         when(repository.findById((int) tech1.getId())).thenReturn(Optional.of(tech1));
         service.deleteTechnicalDetailById(0);
@@ -78,7 +83,8 @@ public class TechnicalDetailServiceTest {
 
     @Test
     public void updateProjectById(){
-        TechnicalDetail tech1 = new TechnicalDetail("sample details:1111");
+        Product prod = new Product();
+        TechnicalDetail tech1 = new TechnicalDetail(prod, "sample details:1111");
         tech1.setDetails("Wells123");
 
         when(repository.findById(1)).thenReturn(Optional.of(tech1));

@@ -1,6 +1,7 @@
 package com.itlizeSession.joole.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,7 @@ public class Product {
 	@OneToMany(mappedBy="prod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JoinColumn(name="project_id")
+	@JsonIgnore
 	private Set<ProjectProduct> projectProduct;
 
 	//@Column(name="time_created")
@@ -52,12 +54,23 @@ public class Product {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeUpdated;
 
-	public Product(Integer id, String brand, String certification, String techDetail, String prodType) {
-		this.resourceId = id;
+	public Product(String brand, String certification, String techDetail, String prodType) {
 		this.brand = brand;
 		this.certification = certification;
-		this.technicalDetail = new TechnicalDetail(techDetail);
-		this.type = new ProductType(prodType);
+		this.technicalDetail = new TechnicalDetail(this, techDetail);
+		this.type = new ProductType(this, prodType);
+		this.timeCreated = new Timestamp(System.currentTimeMillis());
+		this.timeUpdated = new Timestamp(System.currentTimeMillis());
+	}
+
+	public Product(int id, String brand, String certification, String techDetail, String prodType) {
+		this.brand = brand;
+		this.certification = certification;
+		this.technicalDetail = new TechnicalDetail(this, techDetail);
+		this.type = new ProductType(this, prodType);
+		this.resourceId = id;
+		this.timeCreated = new Timestamp(System.currentTimeMillis());
+		this.timeUpdated = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getResourceId() {

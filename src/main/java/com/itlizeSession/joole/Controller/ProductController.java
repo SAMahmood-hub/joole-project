@@ -19,40 +19,60 @@ public class ProductController {
 
 	@GetMapping(path="/list")
 	public ResponseEntity<?> list() {
-		service.create("hello", "hi", "its", "me");
-		System.out.println(service.findOneById(1));
-		List<Product> prod;
+		List<Product> prodList;
 		try {
-			prod = service.findAll();
+			prodList = service.findAll();
+		} catch(Exception e) {
+			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(prodList, HttpStatus.CREATED);
+	}
+
+
+	@PutMapping(path="/create")
+	public ResponseEntity<?> create(@RequestParam("brand") String brand,
+	                         @RequestParam("type") String type,
+						     @RequestParam("tech") String specs,
+							 @RequestParam("cert") String certifications) {
+		try {
+			service.create(brand, certifications, specs, type);
+		} catch(Exception e) {
+			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+
+	@GetMapping(path="/get")
+	public ResponseEntity<?> findById(@RequestParam("id") Integer id) {
+		Product prod;
+		try {
+			prod = service.findOneById(id);
 		} catch(Exception e) {
 			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(prod, HttpStatus.CREATED);
 	}
 
-	@GetMapping(path="/create")
-	public Product create(@RequestParam("brand") String brand,
-	                         @RequestParam("type") String type,
-						     @RequestParam("technical_details") String specs,
-							 @RequestParam("certifications") String certifications) {
-		return service.create(brand, certifications, specs, type);
-	}
-
-
-	@GetMapping(path="/get")
-	public Product findById(@RequestParam("id") Integer id) {
-		return service.findOneById(id);
-	}
-
 
 	@PutMapping(path="/save")
-	public Product saveProject(@RequestBody Product product){
-		return service.update(1, product);
+	public ResponseEntity<?> save(@RequestBody Product product, @RequestParam Integer id){
+		try {
+			service.update(id, product);
+		} catch(Exception e) {
+			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 
-	@PostMapping(path="/delete")
-	public void delete(@RequestParam("id") Integer id) {
-		service.delete(id);
+	@DeleteMapping(path="/delete")
+	public ResponseEntity<?> delete(@RequestParam("id") Integer id) {
+		try {
+			service.delete(id);
+		} catch(Exception e) {
+			return new ResponseEntity<>("{\"error\":\""+e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }

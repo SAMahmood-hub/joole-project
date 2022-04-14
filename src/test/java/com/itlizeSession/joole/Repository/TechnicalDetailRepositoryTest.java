@@ -2,6 +2,7 @@ package com.itlizeSession.joole.Repository;
 
 
 
+import com.itlizeSession.joole.Entity.Product;
 import com.itlizeSession.joole.Repository.TechnicalDetailRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -20,7 +21,8 @@ public class TechnicalDetailRepositoryTest {
     private TechnicalDetailRepository repository;
     @Test
     public void test() {
-        TechnicalDetail tec = new TechnicalDetail("Flying on sky");
+        Product prod = new Product();
+        TechnicalDetail tec = new TechnicalDetail(prod, "Flying on sky");
 
         repository.save(tec);
 
