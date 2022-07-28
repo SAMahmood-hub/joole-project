@@ -13,3 +13,4 @@ public interface ProductTypeRepository extends JpaRepository<ProductType, Intege
 
     List<ProductType> findByApplication(String app);
 }
+
